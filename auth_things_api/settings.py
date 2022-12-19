@@ -79,14 +79,13 @@ WSGI_APPLICATION = 'auth_things_api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE":"django.db.backends.postgresql",
-        "NAME": "oepqjjfb",
-        "USER": "oepqjjfb",
-        "PASSWORD": "DhzhR2VrjlHj5ZY5Uoqu1qRvoOHJQYzY",
-        "HOST":" mouse.db.elephantsql.com",
+        "NAME": "dlymomsj",
+        "USER": "dlymomsj",
+        "PASSWORD": "nWhKYecJnBWpwEbWrKeWMHIH9P9Npmrw",
+        "HOST": "chunee.db.elephantsql.com",
         "PORT": 5432
     }
 }
