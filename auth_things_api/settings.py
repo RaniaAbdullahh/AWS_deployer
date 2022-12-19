@@ -12,10 +12,22 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
-
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+env = environ.Env(
+  
+    DATABASE_ENGINE=(str, "django.db.backends.sqlite3"),
+    DATABASE_NAME=(str, BASE_DIR / "db.sqlite3"),
+    DATABASE_USER=(str, ""),
+    DATABASE_PASSWORD=(str, ""),
+    DATABASE_HOST=(str, ""),
+    DATABASE_PORT=(int, 5432)
+)
+
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -26,7 +38,7 @@ SECRET_KEY = 'django-insecure-z&#rx$p#+t&y^(kta4+9#ofr#%l$6b&6a6(aqfb(^p8_v+(++%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,14 +91,24 @@ WSGI_APPLICATION = 'auth_things_api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+# DATABASES = {
+#     "default": {
+#         "ENGINE":"django.db.backends.postgresql",
+#         "NAME": "dlymomsj",
+#         "USER": "dlymomsj",
+#         "PASSWORD": "nWhKYecJnBWpwEbWrKeWMHIH9P9Npmrw",
+#         "HOST": "chunee.db.elephantsql.com",
+#         "PORT": 5432
+#     }
+# }
 DATABASES = {
     "default": {
-        "ENGINE":"django.db.backends.postgresql",
-        "NAME": "dlymomsj",
-        "USER": "dlymomsj",
-        "PASSWORD": "nWhKYecJnBWpwEbWrKeWMHIH9P9Npmrw",
-        "HOST": "chunee.db.elephantsql.com",
-        "PORT": 5432
+        "ENGINE": env.str("DATABASE_ENGINE"),
+        "NAME": env.str("DATABASE_NAME"),
+        "USER": env.str("DATABASE_USER"),
+        "PASSWORD": env.str("DATABASE_PASSWORD"),
+        "HOST": env.str("DATABASE_HOST"),
+        "PORT": env.int("DATABASE_PORT"),
     }
 }
 
